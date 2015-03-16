@@ -53,7 +53,7 @@ REGEXP;
                 strlen($matches[0])
             ];
         }
-        return [['text', substr($markdown, 0, 3)], 3];
+        return [['text', substr($markdown, 0, 6)], 6];
     }
 
     protected function renderAutoUrl($block)
@@ -103,7 +103,7 @@ REGEXP;
                     // inter wiki link
                     $extWiki = $urlMatches[1];
                     if (isset($this->externalWikis[$extWiki])) {
-                        $url = $this->externalWikis[$extWiki] . $urlMatches[2];
+                        $url = $this->externalWikis[$extWiki] . urlencode($urlMatches[2]);
                     } else {
                         return [
                             [
@@ -115,7 +115,7 @@ REGEXP;
                     }
                 } else {
                     // internal link
-                    $url = $this->wikiUrl . $url;
+                    $url = $this->wikiUrl . urlencode($url);
                 }
             }
             return [

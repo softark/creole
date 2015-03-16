@@ -8,13 +8,9 @@ STRONG**.
 This must be //also
 EMPH//.
 
-But this is **not
+Oh, and **this also is strong.
 
-STRONG**.
-
-And this is //not
-
-EMPH//.
+And this is //also emphasis. ... I don't like it.
 
 This is **//STRONG + EMPH//**.
 
@@ -28,6 +24,10 @@ This **should //somewhat** fail//.
 
 This //should **somewhat// fail**, too.
 
-This //should be {{{//emphasized}}} //.
+This //should be {{{//emphasized}}}//.
 
-This **should be {{{**strong}}} **.
+This **should be {{{**strong}}}**.
+
+This //should be {{{//emphasized}}}.
+
+This **should be {{{**strong}}}.

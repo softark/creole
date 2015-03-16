@@ -18,14 +18,12 @@ trait EmphStrongTrait
 	 */
 	protected function parseStrong($text)
 	{
-		// must take care of code element(s)
 		$pattern =<<< REGEXP
 /^\*\*(
-(.*{{{.*?}}}.*)+?|
-.+?
+  (.*?{{{.*?}}}.*?)+?|  # including inline code span
+  (?!.*{{{.*?}}}).*?    # without inline code span
 )\*\*/sx
 REGEXP;
-
 		if (preg_match($pattern, $text, $matches)) {
 			return [
 				[
@@ -34,8 +32,16 @@ REGEXP;
 				],
 				strlen($matches[0])
 			];
+		} else {
+			// no ending ** ... should be treated as strong
+			return [
+				[
+					'strong',
+					$this->parseInline(substr($text,2))
+				],
+				strlen($text)
+			];
 		}
-		return [['text', '**'], 2];
 	}
 
 	/**
@@ -47,10 +53,11 @@ REGEXP;
 		// must take care of code elements, 'http://', 'https://', and 'ftp://'
 		$pattern =<<< REGEXP
 /^\/\/(
-(.*{{{.*?}}}.*)+?|
-.+?
+  (.*?{{{.*?}}}.*?)+?|  # including inline code span
+  ((?!.*{{{.*?}}}).*?)  # without inline code span
 )(?<!http:|(?<=h)ttps:|(?<=f)tp:)\/\/(?!\/)/sx
 REGEXP;
+
 		if (preg_match($pattern, $text, $matches)) {
 			return [
 				[
@@ -59,8 +66,16 @@ REGEXP;
 				],
 				strlen($matches[0])
 			];
+		} else {
+			// no ending // ... should be treated as em
+			return [
+				[
+					'emph',
+					$this->parseInline(substr($text,2))
+				],
+				strlen($text)
+			];
 		}
-		return [['text', '//'], 2];
 	}
 
 	protected function renderStrong($block)
