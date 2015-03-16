@@ -1,0 +1,33 @@
+This is **STRONG**.
+
+This is //EMPH//.
+
+This must be **also
+STRONG**.
+
+This must be //also
+EMPH//.
+
+But this is **not
+
+STRONG**.
+
+And this is //not
+
+EMPH//.
+
+This is **//STRONG + EMPH//**.
+
+This is //**EMPH + STRONG**//.
+
+This is **STRONG and partially //EMPH// inside**.
+
+This is //EMPH and partially **STRONG** inside//.
+
+This **should //somewhat** fail//.
+
+This //should **somewhat// fail**, too.
+
+This //should be {{{//emphasized}}} //.
+
+This **should be {{{**strong}}} **.

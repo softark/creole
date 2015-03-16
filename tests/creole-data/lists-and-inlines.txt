@@ -1,0 +1,33 @@
+* 項目1
+* 項目2
+* **項目3**
+* //項目4//
+** **項目2-1**
+** //項目2-2//
+
+* 項目1
+* 項目2
+* This is a [[link|]].
+** [[MyBigPage|Go to my page]].
+** [[http://www.wikicreole.org/]]
+*** [[http://www.wikicreole.org/]], [[http://www.wikicreole.org/]]
+* [[http://www.wikicreole.org/|Visit the WikiCreole website]]
+
+# [[Weird Stuff|**Weird** //Stuff//]]
+## [[Wiki-A:WikiFamily]]
+## [[Ohana:WikiFamily]]
+
+* {{myimage.png|これは私の画像です。}}
+* {{images/myimage.jpeg|これは私の画像です。}}
+* {{myimage.JPG}}
+* {{images/myimage.png}}
+
+# {{myimage.png|}}
+# {{http://www.example.com/images/myimage.jpeg|これは私の画像です。}}
+# [[http://www.wikicreole.org/|{{myimage.gif|Visit the WikiCreole website}}]]
+
+* here is the url: http://www.cebe.cc/
+* this url should not be made to a link ... ~http://www.cebe.cc
+* this one is in brackets [http://example.com/].
+* this one is in brackets [http://example.com:80/?id=1,2,3].
+* [link to http://www.google.com/](http://www.google.com/)

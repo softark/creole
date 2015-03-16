@@ -1,0 +1,20 @@
+----
+
+    ----
+
+----    
+
+---- this is not a horizontal rule
+
+this is not a horizontal rule ----
+
+    ---- this is not a horizontal rule
+
+---
+
+-----
+
+Paragraph 1 text-1
+text-2
+    ----
+This is paragraph 2 text-3

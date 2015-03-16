@@ -1,0 +1,42 @@
+{
+	"name": "softark/creole",
+	"description": "Creole wiki parser extension to cebe/markdown markdown parser for PHP",
+	"keywords": ["creole", "wiki", "parser"],
+	"homepage": "https://github.com/softark/creole#readme",
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Nobuo Kihara",
+			"email": "softark@gmail.com",
+			"homepage": "http://softark.net/",
+			"role": "Creator"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/softark/creole/issues",
+		"source": "https://github.com/softark/creole"
+	},
+	"require": {
+		"php": ">=5.4.0",
+		"lib-pcre": "*",
+		"cebe/markdown": "~1.0.1"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "3.7.*",
+		"facebook/xhprof": "*@dev"
+	},
+	"autoload": {
+		"psr-4": {
+			"softark\\creole\\": ""
+		}
+	},
+	"bin": [
+		"bin/markdown"
+	],
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		}
+	}
+}

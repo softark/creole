@@ -1,0 +1,26 @@
+This is a {{{inline **code**}}}.
+
+This also is a {{{//inline//
+code using | and ~/}}}.
+
+{{{
+This is a code block
+    public function foobar($hoge, $piyo)
+    {
+        $a = 1;
+        $b = 2;
+        return $a + $b;
+    }
+}}}
+
+In a //emphasized parts {{{This is // a code.}}}//.
+
+In a **strong parts {{{This is ** a code.}}}**.
+
+* In a list.
+* This is a {{{code}}}.
+
+|= table header |=    table header |
+| in a table cell | This is {{{a || code}}} |
+
+This is {{{{{a bit difficult}}}}}.
