@@ -1,5 +1,5 @@
-Creole wiki parser extension for cebe/markdown
-==============================================
+creole parser extended from cebe/markdown
+=========================================
 
 What is this? <a name="what"></a>
 -------------
