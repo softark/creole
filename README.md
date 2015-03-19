@@ -4,7 +4,7 @@ Creole wiki parser extension for cebe/markdown
 What is this? <a name="what"></a>
 -------------
 
-This is a [Creole wiki](http://www.wikicreole.org/wiki/Creole1.0) parser extension build upon the [cebe/markdown parser for PHP](https://github.com/cebe/markdown).
+This is a [Creole Wiki](http://www.wikicreole.org/wiki/Creole1.0) parser for PHP build upon [cebe/markdown parser for PHP](https://github.com/cebe/markdown).
 
 Installation <a name="installation"></a>
 ------------
@@ -14,12 +14,12 @@ It will also run on facebook's [hhvm](http://hhvm.com/).
 
 Installation is recommended to be done via [composer][] by running:
 
-	composer require softark/creole "~1.0.1"
+	composer require softark/creole "~1.1"
 
 Alternatively you can add the following to the `require` section in your `composer.json` manually:
 
 ```json
-"softark/creole": "~1.0.1"
+"softark/creole": "~1.1"
 ```
 
 Run `composer update` afterwards.
@@ -57,7 +57,6 @@ $parser->parseParagraph($wikiText);
 You may optionally set one of the following options on the parser object:
 
 - `$parser->html5 = true` to enable HTML5 output instead of HTML4.
-- `$parser->enableNewlines = true` to convert all newlines to `<br/>`-tags. By default only newlines with two preceding spaces are converted to `<br/>`-tags. 
 
 It is recommended to use UTF-8 encoding for the input strings. Other encodings are currently not tested.
 
@@ -99,8 +98,9 @@ Acknowledgements <a name="ack"></a>
 
 I'd like to thank [@cebe][] for creating [cebe/markdown][] library on which this work depends.
 
-cebe/markdown is a markdown parser, but it is essentially a well designed general purpose markup language parser
-which can also be used as a solid base for other markup languages.
+As its name describes, cebe/markdown is a markdown parser, but is also a well designed general
+purpose markup language parser at the bottom on which you can implement parsers not only for different
+"flavors" of markdown but also for different markup languages, Creole for instance.
 
 [@cebe]: https://github.com/cebe "Carsten Brandt"
 [cebe/markdown]: https://github.com/cebe/markdown "A super fast, highly extensible markdown parser for PHP"
@@ -110,7 +110,8 @@ FAQ <a name="faq"></a>
 
 ### Where do I report bugs or rendering issues?
 
-Just [open an issue][] on github, post your creole code and describe the problem. You may also attach screenshots of the rendered HTML result to describe your problem.
+Just [open an issue][] on github, post your creole code and describe the problem.
+You may also attach screenshots of the rendered HTML result to describe your problem.
 
 [open an issue]: https://github.com/softark/creole/issues/new
 
