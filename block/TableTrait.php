@@ -15,7 +15,7 @@ trait TableTrait
 	/**
 	 * identify a line as the beginning of a table block.
 	 */
-	protected function identifyTable($line, $lines, $current)
+	protected function identifyTable($line)
 	{
 		return strpos($line, '|') !== false && preg_match('/^\s*\|.*/', $line);
 	}
@@ -47,6 +47,7 @@ REGEXP;
             preg_match_all($pattern, '|' . trim($line, '| ') . '|', $matches);
             $row = [];
             foreach ($matches[0] as $text) {
+                $cell = [];
                 if (isset($text[0]) && $text[0] === '=') {
                     $cell['tag'] = 'th';
                     $cell['text'] = $this->parseInline(trim(substr($text, 1)));

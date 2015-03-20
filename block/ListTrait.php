@@ -117,7 +117,7 @@ trait ListTrait
 			if ($line === '' ||
 				$this->identifyHeadline($line) ||
                 $this->identifyHr($line) ||
-				$this->identifyTable($line, $lines, $i) ||
+				$this->identifyTable($line) ||
 				$this->identifyCode($line) ||
 				$this->isParentItem($line) ||
 				$this->isSiblingItem($line)
@@ -190,6 +190,6 @@ trait ListTrait
 	abstract protected function renderAbsy($absy);
     abstract protected function identifyHeadline($line);
     abstract protected function identifyHr($line);
-    abstract protected function identifyTable($line, $lines, $i);
+    abstract protected function identifyTable($line);
     abstract protected function identifyCode($line);
 }

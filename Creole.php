@@ -48,7 +48,7 @@ class Creole extends \cebe\markdown\Parser
 				!$this->identifyHr($line) &&
 				!$this->identifyUl($line) &&
                 !$this->identifyOl($line) &&
-				!$this->identifyTable($line, $lines, $i) &&
+				!$this->identifyTable($line) &&
 				!$this->identifyCode($line)
 			) {
 				$content[] = $line;
