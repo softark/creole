@@ -26,7 +26,6 @@ trait CodeTrait
 	protected function consumeCode($lines, $current)
 	{
 		// consume until }}}
-		$line = rtrim($lines[$current]);
 		$content = [];
 		for ($i = $current + 1, $count = count($lines); $i < $count; $i++) {
 			$line = rtrim($lines[$i]);

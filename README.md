@@ -4,7 +4,7 @@ creole parser extended from cebe/markdown
 What is this? <a name="what"></a>
 -------------
 
-This is a [Creole Wiki](http://www.wikicreole.org/wiki/Creole1.0) parser for PHP build upon [cebe/markdown parser for PHP](https://github.com/cebe/markdown).
+This is a [Creole Wiki](http://www.wikicreole.org/wiki/Creole1.0) parser for PHP built upon [cebe/markdown parser for PHP](https://github.com/cebe/markdown).
 
 Installation <a name="installation"></a>
 ------------
@@ -114,10 +114,6 @@ Just [open an issue][] on github, post your creole code and describe the problem
 You may also attach screenshots of the rendered HTML result to describe your problem.
 
 [open an issue]: https://github.com/softark/creole/issues/new
-
-### How can I contribute to this library?
-
-Check the [CONTRIBUTING.md](CONTRIBUTING.md) file for more info.
 
 
 ### Am I free to use this?

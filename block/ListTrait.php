@@ -115,10 +115,10 @@ trait ListTrait
 			$line = ltrim($lines[$i]);
 			// A list ends with a blank new line, other block elements, a parent item, or a sibling list.
 			if ($line === '' ||
-				$this->identifyHeadline($line, $lines, $i) ||
-                $this->identifyHr($line, $lines, $i) ||
+				$this->identifyHeadline($line) ||
+                $this->identifyHr($line) ||
 				$this->identifyTable($line, $lines, $i) ||
-				$this->identifyCode($line, $lines, $i) ||
+				$this->identifyCode($line) ||
 				$this->isParentItem($line) ||
 				$this->isSiblingItem($line)
 			) {
@@ -188,4 +188,8 @@ trait ListTrait
 
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($absy);
+    abstract protected function identifyHeadline($line);
+    abstract protected function identifyHr($line);
+    abstract protected function identifyTable($line, $lines, $i);
+    abstract protected function identifyCode($line);
 }

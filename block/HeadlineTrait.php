@@ -16,7 +16,7 @@ trait HeadlineTrait
 	 * identify a line as a headline
 	 * A headline always starts with a '=', with leading white spaces permitted.
 	 */
-	protected function identifyHeadline($line, $lines, $current)
+	protected function identifyHeadline($line)
 	{
 		$line = ltrim($line);
 		return (

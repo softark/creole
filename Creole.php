@@ -44,12 +44,12 @@ class Creole extends \cebe\markdown\Parser
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if (!empty($line) && ltrim($line) !== '' &&
-				!$this->identifyHeadline($line, $lines, $i) &&
-				!$this->identifyHr($line, $lines, $i) &&
-				!$this->identifyUl($line, $lines, $i) &&
-                !$this->identifyOl($line, $lines, $i) &&
+				!$this->identifyHeadline($line) &&
+				!$this->identifyHr($line) &&
+				!$this->identifyUl($line) &&
+                !$this->identifyOl($line) &&
 				!$this->identifyTable($line, $lines, $i) &&
-				!$this->identifyCode($line, $lines, $i)
+				!$this->identifyCode($line)
 			) {
 				$content[] = $line;
 			} else {
