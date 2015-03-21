@@ -53,10 +53,17 @@ $parser->parse($wikiText);
 $parser = new \softark\creole\Creole();
 $parser->parseParagraph($wikiText);
 ```
-
-You may optionally set one of the following options on the parser object:
+You may optionally set the following option on the parser object:
 
 - `$parser->html5 = true` to enable HTML5 output instead of HTML4.
+
+And you should set the following properties when you are using the wiki style links, i.e. [[link]] for an internal link
+and [[WikiName:link]] for an external link:
+
+- `$parser->wikiUrl = 'http://www.example.com/wiki/'` for the url of the current wiki.
+- `$parser->externalWikis = ['Wiki-A' => 'http://www.wiki-a.com/', 'Wiki-B' => 'http://www.wiki-b.net/']`
+  for the external wikis. It should be an array in which the keys are the name of the wiki and
+  the value the urls of them. 
 
 It is recommended to use UTF-8 encoding for the input strings. Other encodings are currently not tested.
 
