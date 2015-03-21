@@ -1,6 +1,10 @@
 creole parser extended from cebe/markdown
 =========================================
 
+[![Build Status](https://travis-ci.org/softark/creole.svg?branch=master)](https://travis-ci.org/softark/creole)
+[![Code Coverage](https://scrutinizer-ci.com/g/softark/creole/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/softark/creole/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/softark/creole/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/softark/creole/?branch=master)
+
 What is this? <a name="what"></a>
 -------------
 
