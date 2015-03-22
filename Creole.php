@@ -43,18 +43,10 @@ class Creole extends \cebe\markdown\Parser
 		$content = [];
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-			if (!empty($line) && ltrim($line) !== '' &&
-				!$this->identifyHeadline($line) &&
-				!$this->identifyHr($line) &&
-				!$this->identifyUl($line) &&
-				!$this->identifyOl($line) &&
-				!$this->identifyTable($line) &&
-				!$this->identifyCode($line)
-			) {
-				$content[] = $line;
-			} else {
-				break;
-			}
+            if ($this->isParagraphEnd($line)) {
+                break;
+            }
+			$content[] = $line;
 		}
 		$block = [
 			'paragraph',
@@ -62,6 +54,27 @@ class Creole extends \cebe\markdown\Parser
 		];
 		return [$block, --$i];
 	}
+
+    /**
+     * Checks if the paragraph ends
+     * @param $line
+     * @return bool true if end of paragraph
+     */
+    private function isParagraphEnd($line)
+    {
+        if (empty($line) ||
+            ltrim($line) === '' ||
+            $this->identifyHeadline($line) ||
+            $this->identifyHr($line) ||
+            $this->identifyUl($line) ||
+            $this->identifyOl($line) ||
+            $this->identifyTable($line) ||
+            $this->identifyCode($line))
+        {
+            return true;
+        }
+        return false;
+    }
 
 
 	/**
