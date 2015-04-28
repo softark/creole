@@ -18,12 +18,12 @@ It will also run on facebook's [hhvm](http://hhvm.com/).
 
 Installation is recommended to be done via [composer][] by running:
 
-	composer require softark/creole "~1.1"
+	composer require softark/creole "~1.2"
 
 Alternatively you can add the following to the `require` section in your `composer.json` manually:
 
 ```json
-"softark/creole": "~1.1"
+"softark/creole": "~1.2"
 ```
 
 Run `composer update` afterwards.
@@ -51,11 +51,11 @@ or calling the `parseParagraph()`-method to parse only inline elements:
 
 ```php
 $parser = new \softark\creole\Creole();
-$parser->parse($wikiText);
+$outputHtml = $parser->parse($wikiText);
 
 // parse only inline elements (useful for one-line descriptions)
 $parser = new \softark\creole\Creole();
-$parser->parseParagraph($wikiText);
+$outputHtml = $parser->parseParagraph($wikiText);
 ```
 You may optionally set the following option on the parser object:
 
@@ -70,6 +70,42 @@ and [[WikiName:link]] for an external link:
   the value the urls of them. 
 
 It is recommended to use UTF-8 encoding for the input strings. Other encodings are currently not tested.
+
+### Using raw html blocks
+
+In the version 1.2.0 and later, you may optionally include raw html blocks in the source wiki text,
+although this feature is disabled by default because it's not in the Creole 1.0 specification.
+
+You can enable this feature by specifying the following option:
+
+- `$parser->useRawHtml = true`
+
+A raw html block should start with a line that only contains `<<<` and end with a corresponding closing line
+which should be `>>>`, for example:
+```
+<<<
+<p>This is a raw html block.</p>
+<ul>
+  <li>You can do whatever you want.</li>
+  <li>You have to be responsible for the consequence.</li>
+</ul>
+>>>
+```
+
+The output of the raw html blocks will be cleansed by HTMLPurifier.
+
+You may optionally configure the cache path of HTMLPurifier like the following:
+
+```
+$parser->htmlPurifierCachePath = 'path/to/your/work';
+// Or, if you are Yii 2 user
+$parser->htmlPurifierCachePath = \Yii::$app->getRuntimePath();
+```
+
+If the cache path is not set, it defaults to the inner cache path of the HTMLPurifier, which should be
+`@vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer`.
+
+Please make sure the cache path is writable from the web server process.
 
 ### The command line script
 

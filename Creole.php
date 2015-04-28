@@ -20,6 +20,7 @@ class Creole extends \cebe\markdown\Parser
     use block\ListTrait;
     use block\TableTrait;
 	use block\RuleTrait;
+	use block\RawHtmlTrait;
 
 // include inline element parsing using traits
 	use inline\CodeTrait;
@@ -60,7 +61,7 @@ class Creole extends \cebe\markdown\Parser
      * @param $line
      * @return bool true if end of paragraph
      */
-    private function isParagraphEnd($line)
+    protected function isParagraphEnd($line)
     {
         if (empty($line) ||
             ltrim($line) === '' ||
@@ -69,7 +70,8 @@ class Creole extends \cebe\markdown\Parser
             $this->identifyUl($line) ||
             $this->identifyOl($line) ||
             $this->identifyTable($line) ||
-            $this->identifyCode($line))
+            $this->identifyCode($line) ||
+			$this->identifyRawHtml($line))
         {
             return true;
         }

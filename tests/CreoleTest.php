@@ -53,6 +53,35 @@ class CreoleTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($html, $m->parse($markdown));
 	}
 
+	/**
+	 * @return Parser
+	 */
+	public function createCreoleEx()
+	{
+		$creole = new Creole();
+		$creole->wikiUrl = 'http://www.example.com/wiki/';
+		$creole->externalWikis = [
+			'Wiki-A' => 'http://www.wiki-a.com/wiki-a/',
+			'Wiki-B' => 'https://www.wiki-b.com/wiki-b/',
+		];
+		$creole->useRawHtml = true;
+
+		return $creole;
+	}
+
+	/**
+	 * @dataProvider dataFilesEx
+	 */
+	public function testParseEx($path, $file)
+	{
+		list($markdown, $html) = $this->getTestDataEx($path, $file);
+		// Different OS line endings should not affect test
+		$html = str_replace(["\r\n", "\n\r", "\r"], "\n", $html);
+
+		$m = $this->createCreoleEx();
+		$this->assertEquals($html, $m->parse($markdown));
+	}
+
 	public function testUtf8()
 	{
 		$this->assertSame("<p>абвгдеёжзийклмнопрстуфхцчшщъыьэюя</p>\n", $this->createCreole()->parse('абвгдеёжзийклмнопрстуфхцчшщъыьэюя'));
@@ -106,6 +135,14 @@ class CreoleTest extends \PHPUnit_Framework_TestCase
 		];
 	}
 
+	public function getTestDataEx($path, $file)
+	{
+		return [
+			file_get_contents($this->getDataPaths()[$path] . '/' . $file . '.txt'),
+			file_get_contents($this->getDataPaths()[$path] . '/' . $file . '-ex' . $this->outputFileExtension),
+		];
+	}
+
 	public function dataFiles()
 	{
 		$files = [];
@@ -120,6 +157,28 @@ class CreoleTest extends \PHPUnit_Framework_TestCase
 				}
 
 				if (substr($file, -4, 4) === '.txt' && file_exists($src . '/' . substr($file, 0, -4) .  $this->outputFileExtension)) {
+					$files[] = [$name, substr($file, 0, -4)];
+				}
+			}
+			closedir($handle);
+		}
+		return $files;
+	}
+
+	public function dataFilesEx()
+	{
+		$files = [];
+		foreach ($this->getDataPaths() as $name => $src) {
+			$handle = opendir($src);
+			if ($handle === false) {
+				throw new \Exception('Unable to open directory: ' . $src);
+			}
+			while (($file = readdir($handle)) !== false) {
+				if ($file === '.' || $file === '..') {
+					continue;
+				}
+
+				if (substr($file, -4, 4) === '.txt' && file_exists($src . '/' . substr($file, 0, -4) . '-ex' . $this->outputFileExtension)) {
 					$files[] = [$name, substr($file, 0, -4)];
 				}
 			}
