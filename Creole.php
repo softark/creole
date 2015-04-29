@@ -17,8 +17,8 @@ class Creole extends \cebe\markdown\Parser
 // include block element parsing using traits
 	use block\CodeTrait;
 	use block\HeadlineTrait;
-    use block\ListTrait;
-    use block\TableTrait;
+	use block\ListTrait;
+	use block\TableTrait;
 	use block\RuleTrait;
 	use block\RawHtmlTrait;
 
@@ -44,9 +44,9 @@ class Creole extends \cebe\markdown\Parser
 		$content = [];
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-            if ($this->isParagraphEnd($line)) {
-                break;
-            }
+			if ($this->isParagraphEnd($line)) {
+				break;
+			}
 			$content[] = $line;
 		}
 		$block = [
@@ -56,27 +56,27 @@ class Creole extends \cebe\markdown\Parser
 		return [$block, --$i];
 	}
 
-    /**
-     * Checks if the paragraph ends
-     * @param $line
-     * @return bool true if end of paragraph
-     */
-    protected function isParagraphEnd($line)
-    {
-        if (empty($line) ||
-            ltrim($line) === '' ||
-            $this->identifyHeadline($line) ||
-            $this->identifyHr($line) ||
-            $this->identifyUl($line) ||
-            $this->identifyOl($line) ||
-            $this->identifyTable($line) ||
-            $this->identifyCode($line) ||
+	/**
+	 * Checks if the paragraph ends
+	 * @param $line
+	 * @return bool true if end of paragraph
+	 */
+	protected function isParagraphEnd($line)
+	{
+		if (empty($line) ||
+			ltrim($line) === '' ||
+			$this->identifyHeadline($line) ||
+			$this->identifyHr($line) ||
+			$this->identifyUl($line) ||
+			$this->identifyOl($line) ||
+			$this->identifyTable($line) ||
+			$this->identifyCode($line) ||
 			$this->identifyRawHtml($line))
-        {
-            return true;
-        }
-        return false;
-    }
+		{
+			return true;
+		}
+		return false;
+	}
 
 
 	/**
@@ -93,7 +93,7 @@ class Creole extends \cebe\markdown\Parser
 		return [['text', $text[0]], 1];
 	}
 
-    /**
+	/**
 	 * @inheritdocs
 	 *
 	 * Parses a newline indicated by two backslashes, and
