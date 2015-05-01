@@ -92,7 +92,7 @@ which should be `>>>`, for example:
 >>>
 ```
 
-Note that the output of the raw html blocks **SHOULD BE CLEANSED** with `$parser->outputFilter`.
+Note that the output of the raw html blocks **SHOULD BE CLEANSED** with `$parser->rawHtmlFilter`.
 A recommendation is to use HTML Purifier for the filter. For example:
 
 ```
@@ -103,8 +103,13 @@ $parser->rawHtmlFilter = function($input) {
 };
 
 // Or, if you are Yii 2 user
-$parser->rawHtmlFilter = \yii\helpers\HtmlPurifier;
+$parser->rawHtmlFilter = function($input) {
+    return \yii\helpers\HtmlPurifier::process($input);
+};
 ```
+
+As you see in the example, the `rawHtmlFilter` should be a callable that accepts the possibly unclean html 
+text string and output the sanitized version of it. 
 
 ### The command line script
 
