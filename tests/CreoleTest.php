@@ -65,6 +65,11 @@ class CreoleTest extends \PHPUnit_Framework_TestCase
 			'Wiki-B' => 'https://www.wiki-b.com/wiki-b/',
 		];
 		$creole->useRawHtml = true;
+        $creole->rawHtmlFilter = function($input) {
+            $config = \HTMLPurifier_Config::createDefault();
+            $purifier = \HTMLPurifier::getInstance($config);
+            return $purifier->purify($input);
+        };
 
 		return $creole;
 	}

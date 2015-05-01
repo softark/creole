@@ -92,20 +92,19 @@ which should be `>>>`, for example:
 >>>
 ```
 
-The output of the raw html blocks will be cleansed by HTMLPurifier.
-
-You may optionally configure the cache path of HTMLPurifier like the following:
+Note that the output of the raw html blocks **SHOULD BE CLEANSED** with `$parser->outputFilter`.
+A recommendation is to use HTML Purifier for the filter. For example:
 
 ```
-$parser->htmlPurifierCachePath = 'path/to/your/work';
+$parser->rawHtmlFilter = function($input) {
+    $config = \HTMLPurifier_Config::createDefault();
+    $purifier = \HTMLPurifier::getInstance($config);
+    return $purifier->purify($input);
+};
+
 // Or, if you are Yii 2 user
-$parser->htmlPurifierCachePath = \Yii::$app->getRuntimePath();
+$parser->rawHtmlFilter = \yii\helpers\HtmlPurifier;
 ```
-
-If the cache path is not set, it defaults to the inner cache path of the HTMLPurifier, which should be
-`@vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer`.
-
-Please make sure the cache path is writable from the web server process.
 
 ### The command line script
 

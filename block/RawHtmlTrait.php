@@ -18,11 +18,11 @@ trait RawHtmlTrait
 	 */
 	public $useRawHtml = false;
 
-	/**
-	 * @var string cache path for the HTMLPurifier.
-	 * Defaults to null, meaning the default inner cache path.
-	 */
-	public $htmlPurifierCachePath = null;
+    /**
+     * @var callable output filter
+     * Defaults to null.
+     */
+	public $rawHtmlFilter = null;
 
 	/**
 	 * identify a line as the beginning of a raw html block.
@@ -59,13 +59,10 @@ trait RawHtmlTrait
 	 */
 	protected function renderRawHtml($block)
 	{
-		$config = \HTMLPurifier_Config::createDefault();
-		if (isset($this->htmlPurifierCachePath)) {
-			$config->set('Cache.SerializerPath', $this->htmlPurifierCachePath);
-		}
-		$purifier = new \HTMLPurifier($config);
-		$clean_html = $purifier->purify($block['content']);
-
-		return $clean_html . "\n";
+        $output = $block['content'];
+        if (is_callable($this->rawHtmlFilter, true)) {
+            $output = call_user_func($this->rawHtmlFilter, $output);
+        }
+		return $output . "\n";
 	}
 }
