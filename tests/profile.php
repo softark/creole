@@ -13,8 +13,8 @@ $creole = file_get_contents(__DIR__ . '/creole-data/creole1.0test.txt');
 xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
 
 for ($n = 0; $n < 100; $n++) {
-	$pd = new \softark\creole\Creole();
-	$pd->parse($creole);
+    $pd = new \softark\creole\Creole();
+    $pd->parse($creole);
 }
 
 $xhprof_data = xhprof_disable();

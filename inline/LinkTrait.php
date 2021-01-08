@@ -190,16 +190,17 @@ REGEXP;
     protected function renderLink($block)
     {
         return '<a href="' . htmlspecialchars($block['url'], ENT_COMPAT | ENT_HTML401, 'UTF-8') . '"'
-        . '>' . $this->renderAbsy($block['text']) . '</a>';
+            . '>' . $this->renderAbsy($block['text']) . '</a>';
     }
 
     protected function renderImage($block)
     {
         return '<img src="' . htmlspecialchars($block['url'], ENT_COMPAT | ENT_HTML401, 'UTF-8') . '"'
-        . ' alt="' . htmlspecialchars($block['text'], ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE, 'UTF-8') . '"'
-        . ($this->html5 ? '>' : ' />');
+            . ' alt="' . htmlspecialchars($block['text'], ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE, 'UTF-8') . '"'
+            . ($this->html5 ? '>' : ' />');
     }
 
     abstract protected function parseInline($text);
+
     abstract protected function renderAbsy($absy);
 }

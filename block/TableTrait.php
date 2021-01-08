@@ -12,20 +12,20 @@ namespace softark\creole\block;
  */
 trait TableTrait
 {
-	/**
-	 * identify a line as the beginning of a table block.
-	 */
-	protected function identifyTable($line)
-	{
-		return strpos($line, '|') !== false && preg_match('/^\s*\|.*/', $line);
-	}
+    /**
+     * identify a line as the beginning of a table block.
+     */
+    protected function identifyTable($line)
+    {
+        return strpos($line, '|') !== false && preg_match('/^\s*\|.*/', $line);
+    }
 
-	/**
-	 * Consume lines for a table
-	 */
-	protected function consumeTable($lines, $current)
-	{
-        $pattern =<<< REGEXP
+    /**
+     * Consume lines for a table
+     */
+    protected function consumeTable($lines, $current)
+    {
+        $pattern = <<< REGEXP
 /(?<=\|)(
     ([^\|]*?{{{.*?}}}[^\|]*?)+|
     ([^\|]*~\|[^\|]*?)+|
@@ -34,15 +34,15 @@ trait TableTrait
 REGEXP;
         // regexp pattern should be in the order of from specific/long/complicated to general/short/simple.
 
-		$block = [
-			'table',
-			'rows' => [],
-		];
-		for ($i = $current, $count = count($lines); $i < $count; $i++) {
-			$line = trim($lines[$i]);
-			if ($line === '' || $line[0] !== '|') {
-				break;
-			}
+        $block = [
+            'table',
+            'rows' => [],
+        ];
+        for ($i = $current, $count = count($lines); $i < $count; $i++) {
+            $line = trim($lines[$i]);
+            if ($line === '' || $line[0] !== '|') {
+                break;
+            }
             $header = $i === $current;
             preg_match_all($pattern, '|' . trim($line, '| ') . '|', $matches);
             $row = [];
@@ -59,20 +59,20 @@ REGEXP;
                 $row['cells'][] = $cell;
             }
             $row['header'] = $header;
-			$block['rows'][] = $row;
-		}
+            $block['rows'][] = $row;
+        }
 
-		return [$block, --$i];
-	}
+        return [$block, --$i];
+    }
 
-	/**
-	 * render a table block
-	 */
-	protected function renderTable($block)
-	{
-		$content = "";
-		$first = true;
-		foreach($block['rows'] as $row) {
+    /**
+     * render a table block
+     */
+    protected function renderTable($block)
+    {
+        $content = "";
+        $first = true;
+        foreach ($block['rows'] as $row) {
             if ($first) {
                 if ($row['header']) {
                     $content .= "<thead>\n";
@@ -96,10 +96,11 @@ REGEXP;
                 }
                 $first = false;
             }
-		}
-		return "<table>\n$content</tbody>\n</table>\n";
-	}
+        }
+        return "<table>\n$content</tbody>\n</table>\n";
+    }
 
-	abstract protected function parseInline($text);
-	abstract protected function renderAbsy($absy);
+    abstract protected function parseInline($text);
+
+    abstract protected function renderAbsy($absy);
 }
