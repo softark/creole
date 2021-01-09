@@ -59,7 +59,7 @@ $outputHtml = $parser->parseParagraph($wikiText);
 ```
 You may optionally set the following option on the parser object:
 
-- `$parser->html5 = true` to enable HTML5 output instead of HTML4.
+- `$parser->html5 = false` to enable HTML4 output instead of HTML5.
 
 And you should set the following properties when you are using the wiki style links, i.e. [[link]] for an internal link
 and [[WikiName:link]] for an external link:
@@ -92,7 +92,7 @@ which should be `>>>`, for example:
 >>>
 ```
 
-Note that the output of the raw html blocks **SHOULD BE CLEANSED** with `$parser->rawHtmlFilter`.
+Note that the output of the raw html blocks get **CLEANSED** automatically with `$parser->rawHtmlFilter` when it is specified.
 A recommendation is to use HTML Purifier for the filter. For example:
 
 ```
@@ -102,7 +102,7 @@ $parser->rawHtmlFilter = function($input) {
     return $purifier->purify($input);
 };
 
-// Or, if you are Yii 2 user
+// Or, if you are using Yii 2
 $parser->rawHtmlFilter = function($input) {
     return \yii\helpers\HtmlPurifier::process($input);
 };

@@ -29,9 +29,10 @@ class Creole extends \cebe\markdown\Parser
 
     /**
      * @var boolean whether to format markup according to HTML5 spec.
-     * Defaults to `false` which means that markup is formatted as HTML4.
+     * Defaults to `true` which means that markup is formatted as HTML5.
+     * If you want HTML4, set it to false.
      */
-    public $html5 = false;
+    public $html5 = true;
 
     /**
      * Consume lines for a paragraph
