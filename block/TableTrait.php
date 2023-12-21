@@ -113,10 +113,10 @@ REGEXP;
             foreach ($row['cells'] as $n => $cell) {
                 $tag = $cell['tag'];
                 $class = '';
-                if ($tag === 'td') {
+                if (!$first) {
                     $align = $block['cols'][$n];
                     if ($align != '') {
-                        $class = ' class="$align"';
+                        $class = " class=\"$align\"";
                     }
                 }
                 $cellText = $this->renderAbsy($cell['text']);
