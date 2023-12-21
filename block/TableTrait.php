@@ -120,7 +120,7 @@ REGEXP;
                     }
                 }
                 $cellText = $this->renderAbsy($cell['text']);
-                if (empty($cellText)) {
+                if ($cellText == '') {
                     $cellText = '&nbsp;';
                 }
                 $content .= "<$tag$class>$cellText</$tag>\n";
