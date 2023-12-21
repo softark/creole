@@ -138,7 +138,7 @@ REGEXP;
                 $first = false;
             }
         }
-        return "<table>\n$colGroup\n$content</tbody>\n</table>\n";
+        return "<table>\n$content</tbody>\n</table>\n";
     }
 
     abstract protected function parseInline($text);
