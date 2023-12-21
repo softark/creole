@@ -99,6 +99,13 @@ REGEXP;
         $content = "";
         $first = true;
         $maxCols = count($block['cols']);
+        if ($maxCols == 0) {
+            foreach ($block['rows'] as $row) {
+                if (count($row['cells']) > $maxCols) {
+                    $maxCols = count($row['cells']);
+                }
+            }
+        }
         foreach ($block['rows'] as $row) {
             if ($first) {
                 if ($row['header']) {
@@ -114,7 +121,7 @@ REGEXP;
                 $tag = $cell['tag'];
                 $class = '';
                 if (!$first) {
-                    $align = $block['cols'][$n];
+                    $align = isset($block['cols'][$n]) ? $block['cols'][$n] : '';
                     if ($align != '') {
                         $class = " class=\"$align\"";
                     }
