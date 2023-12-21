@@ -88,7 +88,7 @@ Note that this function only adds some classes to **td** tags like the following
 </tr>
 ~~~
 In the above, the text in the 2nd col **should** be left-aligned, the 3rd right-aligned, and the 4th center-aligned.
-But when you fail to supply proper styles for those classes, then nothing will happen.
+Wwhen you fail to supply proper styles for those classes, then nothing will happen.
 
 So remember to supply a proper style sheet like the following:
 ~~~
