@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Nobuo Kihara
+ * @copyright Copyright (c) 2015,2023 Nobuo Kihara
  * @license https://github.com/softark/creole/blob/master/LICENSE
  * @link https://github.com/softark/creole#readme
  */
@@ -37,12 +37,38 @@ REGEXP;
         $block = [
             'table',
             'rows' => [],
+            'cols' => [],
         ];
         for ($i = $current, $count = count($lines); $i < $count; $i++) {
             $line = trim($lines[$i]);
             if ($line === '' || $line[0] !== '|') {
                 break;
             }
+
+            // extract alignment from second line
+            if ($i == $current+1 && preg_match('~^\\s*\\|?(\\s*:?-[\\-\\s]*:?\\s*\\|?)*\\s*$~', $line)) {
+                $cols = explode('|', trim($line, ' |'));
+                foreach($cols as $col) {
+                    $col = trim($col);
+                    if (empty($col)) {
+                        $block['cols'][] = '';
+                        continue;
+                    }
+                    $l = ($col[0] === ':');
+                    $r = (substr($col, -1, 1) === ':');
+                    if ($l && $r) {
+                        $block['cols'][] = 'center';
+                    } elseif ($l) {
+                        $block['cols'][] = 'left';
+                    } elseif ($r) {
+                        $block['cols'][] = 'right';
+                    } else {
+                        $block['cols'][] = '';
+                    }
+                }
+                continue;
+            }
+
             $header = $i === $current;
             preg_match_all($pattern, '|' . trim($line, '| ') . '|', $matches);
             $row = [];
@@ -72,6 +98,7 @@ REGEXP;
     {
         $content = "";
         $first = true;
+        $maxCols = count($block['cols']);
         foreach ($block['rows'] as $row) {
             if ($first) {
                 if ($row['header']) {
@@ -81,13 +108,27 @@ REGEXP;
                 }
             }
             $content .= "<tr>\n";
-            foreach ($row['cells'] as $cell) {
+            $numCols = 0;
+            $tag = 'td';
+            foreach ($row['cells'] as $n => $cell) {
                 $tag = $cell['tag'];
+                $class = '';
+                if ($tag === 'td') {
+                    $align = $block['cols'][$n];
+                    if ($align != '') {
+                        $class = ' class="$align"';
+                    }
+                }
                 $cellText = $this->renderAbsy($cell['text']);
                 if (empty($cellText)) {
                     $cellText = '&nbsp;';
                 }
-                $content .= "<$tag>$cellText</$tag>\n";
+                $content .= "<$tag$class>$cellText</$tag>\n";
+                $numCols++;
+            }
+            while ($numCols < $maxCols ) {
+                $content .= "<$tag>&nbsp;</$tag>\n";
+                $numCols++;
             }
             $content .= "</tr>\n";
             if ($first) {
@@ -97,7 +138,7 @@ REGEXP;
                 $first = false;
             }
         }
-        return "<table>\n$content</tbody>\n</table>\n";
+        return "<table>\n$colGroup\n$content</tbody>\n</table>\n";
     }
 
     abstract protected function parseInline($text);

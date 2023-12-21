@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Nobuo Kihara
+ * @copyright Copyright (c) 2015,2023 Nobuo Kihara
  * @license https://github.com/softark/creole/blob/master/LICENSE
  * @link https://github.com/softark/creole#readme
  */

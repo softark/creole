@@ -71,6 +71,32 @@ and [[WikiName:link]] for an external link:
 
 It is recommended to use UTF-8 encoding for the input strings. Other encodings are currently not tested.
 
+### Using markdown-like cell text aligning
+
+In the version 1.3.0 and later, you may optionally use the cell text aligning syntax which is used in markdown.
+If you write the 2nd line of the table source text using the markdown table syntax,
+the cell text aligning will be rendered. If the 2nd line is not markdown compliant,
+nothing will happen.
+
+Note that this function only adds some classes to **td** tags like the following:
+~~~
+<tr>
+<td>1st col</td>
+<td class="left">2nd col</td>
+<td class="right">3rd col</td>
+<td class="center">4th col</td>
+</tr>
+~~~
+In the above, the text in the 2nd col **should** be left-aligned, the 3rd right-aligned, and the 4th center-aligned.
+But when you fail to supply proper styles for those classes, then nothing will happen.
+
+So remember to supply a proper style sheet like the following:
+~~~
+td.left { text-align: left }
+td.right { text-align: right }
+td.center { text-align: center }
+~~~
+
 ### Using raw html blocks
 
 In the version 1.2.0 and later, you may optionally include raw html blocks in the source wiki text,
